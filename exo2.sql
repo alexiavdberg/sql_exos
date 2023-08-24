@@ -1,0 +1,24 @@
+CREATE TABLE T_Fabriquant_FBQ(
+    fbq_id INT PRIMARY KEY
+)
+
+CREATE TABLE T_Taux_TVA(
+    tva INT PRIMARY KEY
+)
+
+CREATE TABLE T_Rayon_RYN(
+    rayon VARCHAR(32) PRIMARY KEY
+)
+
+CREATE TABLE T_PRODUIT_PDT(
+    pdt_id INT PRIMARY KEY,
+    ref_magasin VARCHAR(32),
+    ref_fabricant INT,
+    codeEAN DECIMAL(13,0),
+    prix MONEY,
+    ref_ryn VARCHAR(32),
+    ref_tva int,
+    CONSTRAINT FK_PDT_FBQ FOREIGN KEY (ref_fbq) REFERENCES T_FABIRCANT_FBQ (fbq_id),
+    CONSTRAINT FK_PDT_RYN FOREIGN KEY (ref_ryn) REFERENCES T_Rayin_RYN (rayon),
+    CONSTRAINT FK_PDT_TVA FOREIGN KEY (ref_tva) REFERENCES T_TAUX_TVA (tva)
+)
